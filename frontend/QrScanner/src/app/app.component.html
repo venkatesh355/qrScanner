@@ -1,0 +1,24 @@
+<h2 style="text-align: center;">Upload to Scan</h2>
+
+<div style="display: flex; justify-content: center;">
+    <form [formGroup]="fileForm" class="footer">
+        <div style="margin-right:45px;">
+            <mat-card style="width: 500px; padding: 20px;">
+                <mat-label>Upload The QR Image</mat-label> <br><br><br>
+                <input type="file" name="qrImage" (change)="onFileChange($event)" accept=".png , .jpeg, .jpg">
+                <div *ngIf="isDataLoading" class="loading-indicator" style="display: flex; justify-content: center;">
+                    <mat-spinner></mat-spinner>
+                </div>
+                <div matDialogActions align="right" style="margin-top: 23px ; display: flex; justify-content: space-evenly;" >
+                    <!-- <button mat-raised-button color="primary" (click)="uploadButtonClicked(fileForm)">Upload</button> -->
+                    <button [disabled]="fileForm.get('qrImage')?.value == '' || isUploadDisabled" mat-raised-button color="primary" (click)="uploadButtonClicked(fileForm)">Upload</button>
+                    
+                    <button fxFlexOffset="10px" mat-raised-button color="primary" (click)="cancelButtonClicked()">Cancel</button>
+                </div>
+                <div *ngIf="data" style="margin-top: 20px;">
+                    <h2>{{ data }}</h2>
+                </div>
+            </mat-card>
+        </div>
+    </form>
+</div>
